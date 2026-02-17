@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { environment } from '../../../environments/environment';
 
 export interface AdminUser {
   id: string;
@@ -30,7 +31,7 @@ export interface AdminActionResponse {
 export class AdminService {
   private readonly http = inject(HttpClient);
   private readonly authService = inject(AuthService);
-  private readonly API_BASE = 'http://localhost:3000/api/admin';
+  private readonly API_BASE = `${environment.apiBaseUrl.replace(/\/$/, '')}/api/admin`;
 
   private buildAdminHeaders(): HttpHeaders | null {
     const adminUser = this.authService.currentUser();

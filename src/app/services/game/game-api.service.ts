@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { Player, Territory, Building, Monster, ResourceNode } from '../../models/game.models';
+import { environment } from '../../../environments/environment';
 
 export interface GameState {
   userId: string;
@@ -19,8 +20,8 @@ export interface GameState {
 })
 export class GameApiService {
   private readonly http = inject(HttpClient);
-  private readonly API_BASE = 'http://localhost:3000/api/game';
-  private readonly ECONOMY_BASE = 'http://localhost:3000/api/economy';
+  private readonly API_BASE = `${environment.apiBaseUrl.replace(/\/$/, '')}/api/game`;
+  private readonly ECONOMY_BASE = `${environment.apiBaseUrl.replace(/\/$/, '')}/api/economy`;
 
   async saveGame(gameState: GameState): Promise<{ success: boolean; message: string }> {
     try {

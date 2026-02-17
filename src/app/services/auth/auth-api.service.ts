@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface AuthUser {
   id: string;
@@ -40,7 +41,7 @@ export interface AuthStatusResponse {
 })
 export class AuthApiService {
   private readonly http = inject(HttpClient);
-  private readonly API_BASE = 'http://localhost:3000/api/auth';
+  private readonly API_BASE = `${environment.apiBaseUrl.replace(/\/$/, '')}/api/auth`;
 
   async register(data: RegisterRequest): Promise<AuthResponse> {
     try {
