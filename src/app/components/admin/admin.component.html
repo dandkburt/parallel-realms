@@ -1,0 +1,87 @@
+<div class="admin-container">
+  <div class="admin-header">
+    <div>
+      <h2>🛡️ Admin Dashboard</h2>
+      <p>Manage players, accounts, and saved games.</p>
+    </div>
+    <div class="admin-actions">
+      <button class="btn" (click)="refresh()" [disabled]="isLoading()">🔄 Refresh</button>
+      <a class="btn secondary" routerLink="/">⬅ Back to Game</a>
+    </div>
+  </div>
+
+  @if (errorMessage()) {
+    <div class="alert error">{{ errorMessage() }}</div>
+  }
+
+  @if (successMessage()) {
+    <div class="alert success">{{ successMessage() }}</div>
+  }
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Joined</th>
+          <th>Game</th>
+          <th>Last Saved</th>
+          <th class="actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users(); track user.id) {
+          <tr>
+            <td>
+              <div class="user-cell">
+                <span class="username">{{ user.username }}</span>
+                @if (isSelf(user)) {
+                  <span class="badge self">You</span>
+                }
+              </div>
+            </td>
+            <td>{{ user.email }}</td>
+            <td>
+              <span class="badge" [class.admin]="user.isAdmin" [class.user]="!user.isAdmin">
+                {{ user.isAdmin ? 'Admin' : 'User' }}
+              </span>
+            </td>
+            <td>{{ user.createdAt | date:'short' }}</td>
+            <td>
+              <span class="badge" [class.ok]="user.gameExists" [class.muted]="!user.gameExists">
+                {{ user.gameExists ? 'Saved' : 'None' }}
+              </span>
+            </td>
+            <td>{{ user.lastSaved ? (user.lastSaved | date:'short') : '—' }}</td>
+            <td class="actions">
+              <button
+                class="btn small"
+                (click)="createGame(user)"
+                [disabled]="isLoading() || user.gameExists">
+                ✨ Create Character
+              </button>
+              <button
+                class="btn small warning"
+                (click)="deleteGame(user)"
+                [disabled]="isLoading() || !user.gameExists">
+                🧹 Clear Game
+              </button>
+              <button
+                class="btn small danger"
+                (click)="deleteUser(user)"
+                [disabled]="isLoading() || isSelf(user)">
+                🗑️ Delete User
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="7" class="empty">No users found.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,1405 @@
+{
+  "userId": "user-1770499415553",
+  "player": {
+    "id": "player-1",
+    "name": "Hero",
+    "level": 1,
+    "experience": 0,
+    "nextLevelExp": 100,
+    "health": 100,
+    "maxHealth": 100,
+    "energy": 50,
+    "maxEnergy": 50,
+    "attack": 10,
+    "defense": 5,
+    "gold": 500,
+    "position": {
+      "x": 38.75228544603594,
+      "y": -112.08674863789801,
+      "realm": "real-world"
+    },
+    "inventory": [
+      {
+        "id": "sword-1",
+        "name": "Iron Sword",
+        "type": "weapon",
+        "rarity": "common",
+        "quantity": 1,
+        "stats": {
+          "attack": 5
+        },
+        "icon": "⚔️"
+      },
+      {
+        "id": "potion-1",
+        "name": "Health Potion",
+        "type": "potion",
+        "rarity": "common",
+        "quantity": 5,
+        "stats": {
+          "healthBoost": 50
+        },
+        "icon": "🧪"
+      }
+    ],
+    "equipment": {},
+    "skills": [],
+    "territory": [],
+    "cities": [
+      {
+        "id": "city-1",
+        "name": "Haven",
+        "position": {
+          "x": 38.752091955766,
+          "y": -112.08646774291994,
+          "realm": "real-world"
+        },
+        "level": 1,
+        "population": 10,
+        "maxPopulation": 50,
+        "resources": [
+          {
+            "type": "wood",
+            "amount": 200,
+            "maxAmount": 1000
+          },
+          {
+            "type": "stone",
+            "amount": 150,
+            "maxAmount": 1000
+          },
+          {
+            "type": "iron",
+            "amount": 50,
+            "maxAmount": 500
+          },
+          {
+            "type": "food",
+            "amount": 300,
+            "maxAmount": 1000
+          },
+          {
+            "type": "gold",
+            "amount": 500,
+            "maxAmount": 5000
+          }
+        ],
+        "buildings": [],
+        "productionRates": {
+          "food": 5,
+          "wood": 3,
+          "stone": 2,
+          "iron": 1,
+          "gold": 2
+        }
+      }
+    ],
+    "alliance": null,
+    "movementFlag": null,
+    "autoWalking": false
+  },
+  "territories": [
+    {
+      "id": "territory-1770499673176-38.752091955766--112.08646774291994",
+      "position": {
+        "x": 38.752091955766,
+        "y": -112.08646774291994,
+        "realm": "real-world"
+      },
+      "ownerId": "player-1",
+      "ownerName": "Hero",
+      "buildings": [],
+      "lastClaimed": "2026-02-07T21:27:53.176Z",
+      "isActive": true,
+      "color": "#4169e1"
+    }
+  ],
+  "buildings": [
+    {
+      "id": "building-1770499673177",
+      "type": "house",
+      "position": {
+        "x": 38.752091955766,
+        "y": -112.08646774291994,
+        "realm": "real-world"
+      },
+      "level": 1,
+      "health": 100,
+      "maxHealth": 100,
+      "owner": "player-1",
+      "isUnderConstruction": false,
+      "constructionTime": 0
+    }
+  ],
+  "monsters": [
+    {
+      "id": "monster-0",
+      "name": "Orc",
+      "level": 3,
+      "icon": "👺",
+      "health": 150,
+      "maxHealth": 150,
+      "attack": 15,
+      "defense": 8,
+      "position": {
+        "x": 38.74631440021053,
+        "y": -112.0894852825808,
+        "realm": "real-world"
+      },
+      "loot": [
+        {
+          "id": "gold-1770499673177",
+          "name": "Gold Coins",
+          "type": "resource",
+          "rarity": "common",
+          "quantity": 30,
+          "icon": "💰"
+        }
+      ]
+    },
+    {
+      "id": "monster-1",
+      "name": "Goblin",
+      "level": 1,
+      "icon": "👹",
+      "health": 50,
+      "maxHealth": 50,
+      "attack": 8,
+      "defense": 3,
+      "position": {
+        "x": 38.7597813806851,
+        "y": -112.08406399681279,
+        "realm": "real-world"
+      },
+      "loot": []
+    },
+    {
+      "id": "monster-2",
+      "name": "Dragon",
+      "level": 10,
+      "icon": "🐉",
+      "health": 500,
+      "maxHealth": 500,
+      "attack": 50,
+      "defense": 30,
+      "position": {
+        "x": 38.75354607021328,
+        "y": -112.0938815945549,
+        "realm": "real-world"
+      },
+      "loot": []
+    },
+    {
+      "id": "monster-3",
+      "name": "Troll",
+      "level": 5,
+      "icon": "🧌",
+      "health": 250,
+      "maxHealth": 250,
+      "attack": 25,
+      "defense": 15,
+      "position": {
+        "x": 38.75320475776876,
+        "y": -112.08602049547277,
+        "realm": "real-world"
+      },
+      "loot": []
+    },
+    {
+      "id": "monster-4",
+      "name": "Orc",
+      "level": 3,
+      "icon": "👺",
+      "health": 150,
+      "maxHealth": 150,
+      "attack": 15,
+      "defense": 8,
+      "position": {
+        "x": 38.74786528864752,
+        "y": -112.0893444185239,
+        "realm": "real-world"
+      },
+      "loot": [
+        {
+          "id": "gold-1770499673177",
+          "name": "Gold Coins",
+          "type": "resource",
+          "rarity": "common",
+          "quantity": 30,
+          "icon": "💰"
+        }
+      ]
+    },
+    {
+      "id": "monster-5",
+      "name": "Orc",
+      "level": 3,
+      "icon": "👺",
+      "health": 150,
+      "maxHealth": 150,
+      "attack": 15,
+      "defense": 8,
+      "position": {
+        "x": 38.760649491289016,
+        "y": -112.0853133132934,
+        "realm": "real-world"
+      },
+      "loot": []
+    },
+    {
+      "id": "monster-6",
+      "name": "Orc",
+      "level": 3,
+      "icon": "👺",
+      "health": 150,
+      "maxHealth": 150,
+      "attack": 15,
+      "defense": 8,
+      "position": {
+        "x": 38.74542528655431,
+        "y": -112.08931911484983,
+        "realm": "real-world"
+      },
+      "loot": [
+        {
+          "id": "gold-1770499673177",
+          "name": "Gold Coins",
+          "type": "resource",
+          "rarity": "common",
+          "quantity": 30,
+          "icon": "💰"
+        }
+      ]
+    },
+    {
+      "id": "monster-7",
+      "name": "Orc",
+      "level": 3,
+      "icon": "👺",
+      "health": 150,
+      "maxHealth": 150,
+      "attack": 15,
+      "defense": 8,
+      "position": {
+        "x": 38.75354468819476,
+        "y": -112.08707115936245,
+        "realm": "real-world"
+      },
+      "loot": [
+        {
+          "id": "gold-1770499673177",
+          "name": "Gold Coins",
+          "type": "resource",
+          "rarity": "common",
+          "quantity": 30,
+          "icon": "💰"
+        }
+      ]
+    },
+    {
+      "id": "monster-8",
+      "name": "Troll",
+      "level": 5,
+      "icon": "🧌",
+      "health": 250,
+      "maxHealth": 250,
+      "attack": 25,
+      "defense": 15,
+      "position": {
+        "x": 38.758969573326766,
+        "y": -112.08516332196199,
+        "realm": "real-world"
+      },
+      "loot": [
+        {
+          "id": "gold-1770499673177",
+          "name": "Gold Coins",
+          "type": "resource",
+          "rarity": "common",
+          "quantity": 50,
+          "icon": "💰"
+        }
+      ]
+    },
+    {
+      "id": "monster-9",
+      "name": "Dragon",
+      "level": 10,
+      "icon": "🐉",
+      "health": 500,
+      "maxHealth": 500,
+      "attack": 50,
+      "defense": 30,
+      "position": {
+        "x": 38.758249288531,
+        "y": -112.08847375936003,
+        "realm": "real-world"
+      },
+      "loot": []
+    },
+    {
+      "id": "monster-10",
+      "name": "Troll",
+      "level": 5,
+      "icon": "🧌",
+      "health": 250,
+      "maxHealth": 250,
+      "attack": 25,
+      "defense": 15,
+      "position": {
+        "x": 38.75169947124,
+        "y": -112.08814099791535,
+        "realm": "real-world"
+      },
+      "loot": [
+        {
+          "id": "gold-1770499673177",
+          "name": "Gold Coins",
+          "type": "resource",
+          "rarity": "common",
+          "quantity": 50,
+          "icon": "💰"
+        }
+      ]
+    },
+    {
+      "id": "monster-11",
+      "name": "Dragon",
+      "level": 10,
+      "icon": "🐉",
+      "health": 500,
+      "maxHealth": 500,
+      "attack": 50,
+      "defense": 30,
+      "position": {
+        "x": 38.75312606720624,
+        "y": -112.09002049746796,
+        "realm": "real-world"
+      },
+      "loot": [
+        {
+          "id": "gold-1770499673177",
+          "name": "Gold Coins",
+          "type": "resource",
+          "rarity": "common",
+          "quantity": 100,
+          "icon": "💰"
+        }
+      ]
+    },
+    {
+      "id": "monster-12",
+      "name": "Troll",
+      "level": 5,
+      "icon": "🧌",
+      "health": 250,
+      "maxHealth": 250,
+      "attack": 25,
+      "defense": 15,
+      "position": {
+        "x": 38.74698068381195,
+        "y": -112.09062576427583,
+        "realm": "real-world"
+      },
+      "loot": []
+    },
+    {
+      "id": "monster-13",
+      "name": "Troll",
+      "level": 5,
+      "icon": "🧌",
+      "health": 250,
+      "maxHealth": 250,
+      "attack": 25,
+      "defense": 15,
+      "position": {
+        "x": 38.74885256000876,
+        "y": -112.08075782789325,
+        "realm": "real-world"
+      },
+      "loot": []
+    },
+    {
+      "id": "monster-14",
+      "name": "Goblin",
+      "level": 1,
+      "icon": "👹",
+      "health": 50,
+      "maxHealth": 50,
+      "attack": 8,
+      "defense": 3,
+      "position": {
+        "x": 38.754857339413704,
+        "y": -112.07765087838115,
+        "realm": "real-world"
+      },
+      "loot": []
+    },
+    {
+      "id": "monster-15",
+      "name": "Dragon",
+      "level": 10,
+      "icon": "🐉",
+      "health": 500,
+      "maxHealth": 500,
+      "attack": 50,
+      "defense": 30,
+      "position": {
+        "x": 38.75096524942235,
+        "y": -112.08530539164903,
+        "realm": "real-world"
+      },
+      "loot": [
+        {
+          "id": "gold-1770499673177",
+          "name": "Gold Coins",
+          "type": "resource",
+          "rarity": "common",
+          "quantity": 100,
+          "icon": "💰"
+        }
+      ]
+    },
+    {
+      "id": "monster-16",
+      "name": "Troll",
+      "level": 5,
+      "icon": "🧌",
+      "health": 250,
+      "maxHealth": 250,
+      "attack": 25,
+      "defense": 15,
+      "position": {
+        "x": 38.753176643415756,
+        "y": -112.08603566481703,
+        "realm": "real-world"
+      },
+      "loot": [
+        {
+          "id": "gold-1770499673177",
+          "name": "Gold Coins",
+          "type": "resource",
+          "rarity": "common",
+          "quantity": 50,
+          "icon": "💰"
+        }
+      ]
+    },
+    {
+      "id": "monster-17",
+      "name": "Dragon",
+      "level": 10,
+      "icon": "🐉",
+      "health": 500,
+      "maxHealth": 500,
+      "attack": 50,
+      "defense": 30,
+      "position": {
+        "x": 38.74593475763347,
+        "y": -112.07943437952882,
+        "realm": "real-world"
+      },
+      "loot": [
+        {
+          "id": "gold-1770499673177",
+          "name": "Gold Coins",
+          "type": "resource",
+          "rarity": "common",
+          "quantity": 100,
+          "icon": "💰"
+        }
+      ]
+    },
+    {
+      "id": "monster-18",
+      "name": "Troll",
+      "level": 5,
+      "icon": "🧌",
+      "health": 250,
+      "maxHealth": 250,
+      "attack": 25,
+      "defense": 15,
+      "position": {
+        "x": 38.748605421106234,
+        "y": -112.09235039589568,
+        "realm": "real-world"
+      },
+      "loot": []
+    },
+    {
+      "id": "monster-19",
+      "name": "Orc",
+      "level": 3,
+      "icon": "👺",
+      "health": 150,
+      "maxHealth": 150,
+      "attack": 15,
+      "defense": 8,
+      "position": {
+        "x": 38.75141155585172,
+        "y": -112.08610198763517,
+        "realm": "real-world"
+      },
+      "loot": [
+        {
+          "id": "gold-1770499673177",
+          "name": "Gold Coins",
+          "type": "resource",
+          "rarity": "common",
+          "quantity": 30,
+          "icon": "💰"
+        }
+      ]
+    },
+    {
+      "id": "monster-20",
+      "name": "Dragon",
+      "level": 10,
+      "icon": "🐉",
+      "health": 500,
+      "maxHealth": 500,
+      "attack": 50,
+      "defense": 30,
+      "position": {
+        "x": 38.753645507201426,
+        "y": -112.08770902888905,
+        "realm": "real-world"
+      },
+      "loot": [
+        {
+          "id": "gold-1770499673177",
+          "name": "Gold Coins",
+          "type": "resource",
+          "rarity": "common",
+          "quantity": 100,
+          "icon": "💰"
+        }
+      ]
+    },
+    {
+      "id": "monster-21",
+      "name": "Goblin",
+      "level": 1,
+      "icon": "👹",
+      "health": 50,
+      "maxHealth": 50,
+      "attack": 8,
+      "defense": 3,
+      "position": {
+        "x": 38.75263909064149,
+        "y": -112.09079771389993,
+        "realm": "real-world"
+      },
+      "loot": []
+    },
+    {
+      "id": "monster-22",
+      "name": "Orc",
+      "level": 3,
+      "icon": "👺",
+      "health": 150,
+      "maxHealth": 150,
+      "attack": 15,
+      "defense": 8,
+      "position": {
+        "x": 38.74790666912242,
+        "y": -112.0849079506175,
+        "realm": "real-world"
+      },
+      "loot": [
+        {
+          "id": "gold-1770499673177",
+          "name": "Gold Coins",
+          "type": "resource",
+          "rarity": "common",
+          "quantity": 30,
+          "icon": "💰"
+        }
+      ]
+    },
+    {
+      "id": "monster-23",
+      "name": "Dragon",
+      "level": 10,
+      "icon": "🐉",
+      "health": 500,
+      "maxHealth": 500,
+      "attack": 50,
+      "defense": 30,
+      "position": {
+        "x": 38.7458284500678,
+        "y": -112.08379322644514,
+        "realm": "real-world"
+      },
+      "loot": []
+    },
+    {
+      "id": "monster-24",
+      "name": "Troll",
+      "level": 5,
+      "icon": "🧌",
+      "health": 250,
+      "maxHealth": 250,
+      "attack": 25,
+      "defense": 15,
+      "position": {
+        "x": 38.75486892102096,
+        "y": -112.08955745881005,
+        "realm": "real-world"
+      },
+      "loot": []
+    },
+    {
+      "id": "monster-25",
+      "name": "Orc",
+      "level": 3,
+      "icon": "👺",
+      "health": 150,
+      "maxHealth": 150,
+      "attack": 15,
+      "defense": 8,
+      "position": {
+        "x": 38.74794193003083,
+        "y": -112.0828992503805,
+        "realm": "real-world"
+      },
+      "loot": [
+        {
+          "id": "gold-1770499673177",
+          "name": "Gold Coins",
+          "type": "resource",
+          "rarity": "common",
+          "quantity": 30,
+          "icon": "💰"
+        }
+      ]
+    },
+    {
+      "id": "monster-26",
+      "name": "Orc",
+      "level": 3,
+      "icon": "👺",
+      "health": 150,
+      "maxHealth": 150,
+      "attack": 15,
+      "defense": 8,
+      "position": {
+        "x": 38.75062037150673,
+        "y": -112.08381452870897,
+        "realm": "real-world"
+      },
+      "loot": []
+    },
+    {
+      "id": "monster-27",
+      "name": "Dragon",
+      "level": 10,
+      "icon": "🐉",
+      "health": 500,
+      "maxHealth": 500,
+      "attack": 50,
+      "defense": 30,
+      "position": {
+        "x": 38.747323209548654,
+        "y": -112.08244352288074,
+        "realm": "real-world"
+      },
+      "loot": [
+        {
+          "id": "gold-1770499673177",
+          "name": "Gold Coins",
+          "type": "resource",
+          "rarity": "common",
+          "quantity": 100,
+          "icon": "💰"
+        }
+      ]
+    },
+    {
+      "id": "monster-28",
+      "name": "Dragon",
+      "level": 10,
+      "icon": "🐉",
+      "health": 500,
+      "maxHealth": 500,
+      "attack": 50,
+      "defense": 30,
+      "position": {
+        "x": 38.754517756317206,
+        "y": -112.08468173362105,
+        "realm": "real-world"
+      },
+      "loot": []
+    },
+    {
+      "id": "monster-29",
+      "name": "Goblin",
+      "level": 1,
+      "icon": "👹",
+      "health": 50,
+      "maxHealth": 50,
+      "attack": 8,
+      "defense": 3,
+      "position": {
+        "x": 38.76007384456436,
+        "y": -112.0860476436255,
+        "realm": "real-world"
+      },
+      "loot": []
+    }
+  ],
+  "resourceNodes": [
+    {
+      "id": "resource-0",
+      "type": "iron",
+      "position": {
+        "x": 38.755586985838015,
+        "y": -112.08231287203681,
+        "realm": "real-world"
+      },
+      "amount": 200,
+      "maxAmount": 200,
+      "regenerationRate": 3,
+      "icon": "⛓️"
+    },
+    {
+      "id": "resource-1",
+      "type": "iron",
+      "position": {
+        "x": 38.75716223811854,
+        "y": -112.08251880016438,
+        "realm": "real-world"
+      },
+      "amount": 200,
+      "maxAmount": 200,
+      "regenerationRate": 3,
+      "icon": "⛓️"
+    },
+    {
+      "id": "resource-2",
+      "type": "iron",
+      "position": {
+        "x": 38.75229875032696,
+        "y": -112.08908940528525,
+        "realm": "real-world"
+      },
+      "amount": 200,
+      "maxAmount": 200,
+      "regenerationRate": 3,
+      "icon": "⛓️"
+    },
+    {
+      "id": "resource-3",
+      "type": "iron",
+      "position": {
+        "x": 38.75299208212068,
+        "y": -112.07655935816123,
+        "realm": "real-world"
+      },
+      "amount": 200,
+      "maxAmount": 200,
+      "regenerationRate": 3,
+      "icon": "⛓️"
+    },
+    {
+      "id": "resource-4",
+      "type": "food",
+      "position": {
+        "x": 38.75439671757883,
+        "y": -112.08435886470147,
+        "realm": "real-world"
+      },
+      "amount": 400,
+      "maxAmount": 400,
+      "regenerationRate": 15,
+      "icon": "🍎"
+    },
+    {
+      "id": "resource-5",
+      "type": "wood",
+      "position": {
+        "x": 38.75473286200183,
+        "y": -112.08362814485365,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    },
+    {
+      "id": "resource-6",
+      "type": "wood",
+      "position": {
+        "x": 38.74977142344123,
+        "y": -112.08405981249395,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    },
+    {
+      "id": "resource-7",
+      "type": "food",
+      "position": {
+        "x": 38.75193292252443,
+        "y": -112.09299802015309,
+        "realm": "real-world"
+      },
+      "amount": 400,
+      "maxAmount": 400,
+      "regenerationRate": 15,
+      "icon": "🍎"
+    },
+    {
+      "id": "resource-8",
+      "type": "wood",
+      "position": {
+        "x": 38.749098800119384,
+        "y": -112.09431036197972,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    },
+    {
+      "id": "resource-9",
+      "type": "stone",
+      "position": {
+        "x": 38.74687999207852,
+        "y": -112.08852888773241,
+        "realm": "real-world"
+      },
+      "amount": 300,
+      "maxAmount": 300,
+      "regenerationRate": 5,
+      "icon": "🪨"
+    },
+    {
+      "id": "resource-10",
+      "type": "wood",
+      "position": {
+        "x": 38.74661387685689,
+        "y": -112.0924813862401,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    },
+    {
+      "id": "resource-11",
+      "type": "wood",
+      "position": {
+        "x": 38.7487499418302,
+        "y": -112.09439928084488,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    },
+    {
+      "id": "resource-12",
+      "type": "wood",
+      "position": {
+        "x": 38.751733407748056,
+        "y": -112.08475753856634,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    },
+    {
+      "id": "resource-13",
+      "type": "iron",
+      "position": {
+        "x": 38.75102648160493,
+        "y": -112.08785118158697,
+        "realm": "real-world"
+      },
+      "amount": 200,
+      "maxAmount": 200,
+      "regenerationRate": 3,
+      "icon": "⛓️"
+    },
+    {
+      "id": "resource-14",
+      "type": "iron",
+      "position": {
+        "x": 38.75107957492821,
+        "y": -112.08986095253935,
+        "realm": "real-world"
+      },
+      "amount": 200,
+      "maxAmount": 200,
+      "regenerationRate": 3,
+      "icon": "⛓️"
+    },
+    {
+      "id": "resource-15",
+      "type": "stone",
+      "position": {
+        "x": 38.75947629548852,
+        "y": -112.08480593131084,
+        "realm": "real-world"
+      },
+      "amount": 300,
+      "maxAmount": 300,
+      "regenerationRate": 5,
+      "icon": "🪨"
+    },
+    {
+      "id": "resource-16",
+      "type": "iron",
+      "position": {
+        "x": 38.751553547252314,
+        "y": -112.07909460724076,
+        "realm": "real-world"
+      },
+      "amount": 200,
+      "maxAmount": 200,
+      "regenerationRate": 3,
+      "icon": "⛓️"
+    },
+    {
+      "id": "resource-17",
+      "type": "wood",
+      "position": {
+        "x": 38.75079292706074,
+        "y": -112.08765901201818,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    },
+    {
+      "id": "resource-18",
+      "type": "iron",
+      "position": {
+        "x": 38.751784586785995,
+        "y": -112.08654943771552,
+        "realm": "real-world"
+      },
+      "amount": 200,
+      "maxAmount": 200,
+      "regenerationRate": 3,
+      "icon": "⛓️"
+    },
+    {
+      "id": "resource-19",
+      "type": "iron",
+      "position": {
+        "x": 38.75345489494035,
+        "y": -112.08576159215079,
+        "realm": "real-world"
+      },
+      "amount": 200,
+      "maxAmount": 200,
+      "regenerationRate": 3,
+      "icon": "⛓️"
+    },
+    {
+      "id": "resource-20",
+      "type": "stone",
+      "position": {
+        "x": 38.75419983099007,
+        "y": -112.08625794586641,
+        "realm": "real-world"
+      },
+      "amount": 300,
+      "maxAmount": 300,
+      "regenerationRate": 5,
+      "icon": "🪨"
+    },
+    {
+      "id": "resource-21",
+      "type": "stone",
+      "position": {
+        "x": 38.74902980039979,
+        "y": -112.08625091463783,
+        "realm": "real-world"
+      },
+      "amount": 300,
+      "maxAmount": 300,
+      "regenerationRate": 5,
+      "icon": "🪨"
+    },
+    {
+      "id": "resource-22",
+      "type": "wood",
+      "position": {
+        "x": 38.746862336716895,
+        "y": -112.08121863226219,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    },
+    {
+      "id": "resource-23",
+      "type": "iron",
+      "position": {
+        "x": 38.74533721180856,
+        "y": -112.08988590820942,
+        "realm": "real-world"
+      },
+      "amount": 200,
+      "maxAmount": 200,
+      "regenerationRate": 3,
+      "icon": "⛓️"
+    },
+    {
+      "id": "resource-24",
+      "type": "stone",
+      "position": {
+        "x": 38.75962346821285,
+        "y": -112.08140138582928,
+        "realm": "real-world"
+      },
+      "amount": 300,
+      "maxAmount": 300,
+      "regenerationRate": 5,
+      "icon": "🪨"
+    },
+    {
+      "id": "resource-25",
+      "type": "food",
+      "position": {
+        "x": 38.74883576995564,
+        "y": -112.09143750414991,
+        "realm": "real-world"
+      },
+      "amount": 400,
+      "maxAmount": 400,
+      "regenerationRate": 15,
+      "icon": "🍎"
+    },
+    {
+      "id": "resource-26",
+      "type": "stone",
+      "position": {
+        "x": 38.75141528495345,
+        "y": -112.08987863951606,
+        "realm": "real-world"
+      },
+      "amount": 300,
+      "maxAmount": 300,
+      "regenerationRate": 5,
+      "icon": "🪨"
+    },
+    {
+      "id": "resource-27",
+      "type": "wood",
+      "position": {
+        "x": 38.748232052074144,
+        "y": -112.08990380006783,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    },
+    {
+      "id": "resource-28",
+      "type": "stone",
+      "position": {
+        "x": 38.758219123249624,
+        "y": -112.08654100542344,
+        "realm": "real-world"
+      },
+      "amount": 300,
+      "maxAmount": 300,
+      "regenerationRate": 5,
+      "icon": "🪨"
+    },
+    {
+      "id": "resource-29",
+      "type": "iron",
+      "position": {
+        "x": 38.76041051396848,
+        "y": -112.08894117101201,
+        "realm": "real-world"
+      },
+      "amount": 200,
+      "maxAmount": 200,
+      "regenerationRate": 3,
+      "icon": "⛓️"
+    },
+    {
+      "id": "resource-30",
+      "type": "stone",
+      "position": {
+        "x": 38.751424532233095,
+        "y": -112.08597599713306,
+        "realm": "real-world"
+      },
+      "amount": 300,
+      "maxAmount": 300,
+      "regenerationRate": 5,
+      "icon": "🪨"
+    },
+    {
+      "id": "resource-31",
+      "type": "wood",
+      "position": {
+        "x": 38.752588593197856,
+        "y": -112.08688710892484,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    },
+    {
+      "id": "resource-32",
+      "type": "stone",
+      "position": {
+        "x": 38.75106984247916,
+        "y": -112.09561716297897,
+        "realm": "real-world"
+      },
+      "amount": 300,
+      "maxAmount": 300,
+      "regenerationRate": 5,
+      "icon": "🪨"
+    },
+    {
+      "id": "resource-33",
+      "type": "stone",
+      "position": {
+        "x": 38.752819828561854,
+        "y": -112.0838670724569,
+        "realm": "real-world"
+      },
+      "amount": 300,
+      "maxAmount": 300,
+      "regenerationRate": 5,
+      "icon": "🪨"
+    },
+    {
+      "id": "resource-34",
+      "type": "iron",
+      "position": {
+        "x": 38.76038942014064,
+        "y": -112.08828658876098,
+        "realm": "real-world"
+      },
+      "amount": 200,
+      "maxAmount": 200,
+      "regenerationRate": 3,
+      "icon": "⛓️"
+    },
+    {
+      "id": "resource-35",
+      "type": "food",
+      "position": {
+        "x": 38.75225925685087,
+        "y": -112.0861139135906,
+        "realm": "real-world"
+      },
+      "amount": 400,
+      "maxAmount": 400,
+      "regenerationRate": 15,
+      "icon": "🍎"
+    },
+    {
+      "id": "resource-36",
+      "type": "stone",
+      "position": {
+        "x": 38.74985929666235,
+        "y": -112.082539546266,
+        "realm": "real-world"
+      },
+      "amount": 300,
+      "maxAmount": 300,
+      "regenerationRate": 5,
+      "icon": "🪨"
+    },
+    {
+      "id": "resource-37",
+      "type": "food",
+      "position": {
+        "x": 38.74755673974677,
+        "y": -112.08629080852428,
+        "realm": "real-world"
+      },
+      "amount": 400,
+      "maxAmount": 400,
+      "regenerationRate": 15,
+      "icon": "🍎"
+    },
+    {
+      "id": "resource-38",
+      "type": "iron",
+      "position": {
+        "x": 38.74592871227758,
+        "y": -112.08667859991961,
+        "realm": "real-world"
+      },
+      "amount": 200,
+      "maxAmount": 200,
+      "regenerationRate": 3,
+      "icon": "⛓️"
+    },
+    {
+      "id": "resource-39",
+      "type": "food",
+      "position": {
+        "x": 38.75897354164298,
+        "y": -112.09061919821242,
+        "realm": "real-world"
+      },
+      "amount": 400,
+      "maxAmount": 400,
+      "regenerationRate": 15,
+      "icon": "🍎"
+    },
+    {
+      "id": "resource-40",
+      "type": "wood",
+      "position": {
+        "x": 38.752485465442184,
+        "y": -112.0834798370285,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    },
+    {
+      "id": "resource-41",
+      "type": "wood",
+      "position": {
+        "x": 38.75189868652698,
+        "y": -112.08648598435654,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    },
+    {
+      "id": "resource-42",
+      "type": "food",
+      "position": {
+        "x": 38.75507269809554,
+        "y": -112.08220939511155,
+        "realm": "real-world"
+      },
+      "amount": 400,
+      "maxAmount": 400,
+      "regenerationRate": 15,
+      "icon": "🍎"
+    },
+    {
+      "id": "resource-43",
+      "type": "wood",
+      "position": {
+        "x": 38.74965292867072,
+        "y": -112.08529011245194,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    },
+    {
+      "id": "resource-44",
+      "type": "wood",
+      "position": {
+        "x": 38.7489555218168,
+        "y": -112.08642835107972,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    },
+    {
+      "id": "resource-45",
+      "type": "stone",
+      "position": {
+        "x": 38.75209176425076,
+        "y": -112.0865105868496,
+        "realm": "real-world"
+      },
+      "amount": 300,
+      "maxAmount": 300,
+      "regenerationRate": 5,
+      "icon": "🪨"
+    },
+    {
+      "id": "resource-46",
+      "type": "food",
+      "position": {
+        "x": 38.75400184701364,
+        "y": -112.09274284114572,
+        "realm": "real-world"
+      },
+      "amount": 400,
+      "maxAmount": 400,
+      "regenerationRate": 15,
+      "icon": "🍎"
+    },
+    {
+      "id": "resource-47",
+      "type": "wood",
+      "position": {
+        "x": 38.74917053759395,
+        "y": -112.087656659116,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    },
+    {
+      "id": "resource-48",
+      "type": "stone",
+      "position": {
+        "x": 38.760725843573184,
+        "y": -112.08698892572812,
+        "realm": "real-world"
+      },
+      "amount": 300,
+      "maxAmount": 300,
+      "regenerationRate": 5,
+      "icon": "🪨"
+    },
+    {
+      "id": "resource-49",
+      "type": "wood",
+      "position": {
+        "x": 38.75273651788546,
+        "y": -112.08883910893587,
+        "realm": "real-world"
+      },
+      "amount": 500,
+      "maxAmount": 500,
+      "regenerationRate": 10,
+      "icon": "🌳"
+    }
+  ],
+  "hasPlacedFirstFlag": true,
+  "lastSaved": "2026-02-08T01:28:50.220Z"
+}

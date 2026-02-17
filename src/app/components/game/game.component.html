@@ -1,0 +1,571 @@
+<div class="game-container">
+  <!-- Header Stats Bar -->
+  <div class="stats-bar">
+    <div class="player-info">
+      <div class="player-menu">
+        <button class="player-menu-trigger" (click)="togglePlayerMenu()">
+          ⚔️ {{ gameService.player().name }}
+          <span class="caret">▾</span>
+        </button>
+        @if (playerMenuOpen) {
+          <div class="player-menu-dropdown">
+            <div class="menu-section">
+              <div class="menu-title">Character</div>
+              <div class="menu-row">Level: <strong>{{ gameService.player().level }}</strong></div>
+              <div class="menu-row">XP: <strong>{{ gameService.player().experience }}</strong></div>
+              <div class="menu-row">
+                Next Level: <strong>{{ gameService.experienceToNextLevel() - gameService.player().experience }}</strong>
+              </div>
+            </div>
+            <button class="menu-action" (click)="logout()">🚪 Log out</button>
+          </div>
+        }
+      </div>
+      <span class="level">Lvl {{ gameService.player().level }}</span>
+      @if (authService.currentUser()?.isAdmin) {
+        <a routerLink="/admin" class="admin-link">🛡️ Admin</a>
+      }
+    </div>
+    
+    <div class="stats">
+      <div class="stat health">
+        <span class="label">HP:</span>
+        <div class="bar">
+          <div class="fill" [style.width.%]="(gameService.player().health / gameService.player().maxHealth) * 100"></div>
+        </div>
+        <span class="value">{{ gameService.player().health }}/{{ gameService.player().maxHealth }}</span>
+      </div>
+      
+      <div class="stat energy">
+        <span class="label">Energy:</span>
+        <div class="bar">
+          <div class="fill" [style.width.%]="(gameService.player().energy / gameService.player().maxEnergy) * 100"></div>
+        </div>
+        <span class="value">{{ gameService.player().energy }}/{{ gameService.player().maxEnergy }}</span>
+      </div>
+      
+      <div class="stat-item">
+        <span class="icon">💰</span>
+        <span>{{ gameService.player().gold }}g</span>
+      </div>
+      
+      <div class="stat-item">
+        <span class="icon">⭐</span>
+        <span>{{ gameService.player().experience }}/{{ gameService.experienceToNextLevel() }} XP</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Game Area -->
+  <div class="game-area">
+    <!-- Full-Screen Map with Overlays -->
+    <div class="map-container">
+      <div class="map-header">
+        <h3>🗺️ Parallel Realms</h3>
+        @if (!gameService.hasPlacedFirstFlag()) {
+          <div class="first-flag-hint">
+            📍 Right-click map to place your first flag!
+          </div>
+        }
+        <button (click)="openBuildMenu()" class="build-btn">
+          🏗️ Build
+        </button>
+      </div>
+
+      <!-- Map fills the entire container as background -->
+      <div class="real-world-map">
+        <div #openStreetMap class="map-display"></div>
+        <div class="zoom-level-display">🔍 Zoom: {{ currentZoom() }}</div>
+        @if (mapError) {
+          <div class="map-error">{{ mapError }}</div>
+        }
+        @if (mapLoading) {
+          <div class="map-loading">📍 Getting your location...</div>
+        }
+      </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="side-panel">
+      <!-- Movement/Expansion Panel -->
+      @if (gameService.hasPlacedFirstFlag()) {
+        <div class="movement-panel">
+          <h3>🚶 Movement & Actions</h3>
+          <div class="movement-info">
+            <div class="control-instructions">
+              <div class="instruction-item">
+                <strong>🖱️ Double-Click</strong>
+                <p>Auto-walk to location</p>
+              </div>
+              <div class="instruction-item">
+                <strong>🖱️ Right-Click</strong>
+                <p>Place flag / Expand territory</p>
+              </div>
+            </div>
+            @if (movementDestination) {
+              <div class="movement-destination">
+                <strong>Walking to:</strong><br>
+                {{ movementDestination.x.toFixed(4) }}, {{ movementDestination.y.toFixed(4) }}
+              </div>
+            }
+            @if (gameService.player().movementFlag) {
+              <div class="movement-destination dog-flag">
+                <strong>🐕 Dog found:</strong><br>
+                {{ gameService.player().movementFlag!.x.toFixed(4) }}, {{ gameService.player().movementFlag!.y.toFixed(4) }}
+                <button class="action-btn track" (click)="walkToDogFlag()">Track</button>
+              </div>
+            }
+            <div class="current-location">
+              <strong>Current Position:</strong><br>
+              {{ gameService.player().position.x.toFixed(4) }}, {{ gameService.player().position.y.toFixed(4) }}
+            </div>
+            <div class="movement-actions">
+              <button (click)="rest()" class="action-btn rest">
+                💤 Rest
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- City Resources -->
+      <div class="resources-panel">
+        <h3>🏛️ City Resources</h3>
+        <div class="resource-grid">
+          @for (resource of getCityResources(); track resource.type) {
+            <div class="resource-item">
+              <span class="resource-icon">
+                @switch (resource.type) {
+                  @case ('wood') { 🪵 }
+                  @case ('stone') { 🪨 }
+                  @case ('iron') { ⛓️ }
+                  @case ('food') { 🍎 }
+                  @case ('gold') { 💰 }
+                }
+              </span>
+              <div class="resource-info">
+                <span class="resource-name">{{ resource.type }}</span>
+                <span class="resource-amount">{{ resource.amount }}</span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Combat Panel -->
+      @if (gameService.inCombat()) {
+        <div class="combat-panel">
+          <h3>⚔️ Combat</h3>
+          @if (gameService.currentEnemy(); as enemy) {
+            <div class="enemy-info">
+              <div class="enemy-header">
+                <span class="enemy-icon">{{ enemy.icon }}</span>
+                <div>
+                  <h4>{{ enemy.name }}</h4>
+                  <span class="enemy-level">Level {{ enemy.level }}</span>
+                </div>
+              </div>
+              
+              <div class="enemy-stats">
+                <div class="stat health">
+                  <span class="label">HP:</span>
+                  <div class="bar">
+                    <div class="fill" [style.width.%]="(enemy.health / enemy.maxHealth) * 100"></div>
+                  </div>
+                  <span class="value">{{ enemy.health }}/{{ enemy.maxHealth }}</span>
+                </div>
+                <div class="stat-row">
+                  <span>⚔️ Attack: {{ enemy.attack }}</span>
+                  <span>🛡️ Defense: {{ enemy.defense }}</span>
+                </div>
+              </div>
+
+              <div class="combat-actions">
+                <button (click)="attack()" class="action-btn attack">
+                  ⚔️ Attack
+                </button>
+                <button class="action-btn defend" disabled>
+                  🛡️ Defend (Coming Soon)
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Inventory Panel -->
+      <div class="inventory-panel">
+        <h3>🎒 Inventory</h3>
+        <div class="inventory-grid">
+          @for (item of gameService.player().inventory; track item.id) {
+            <div class="inventory-item" [class]="item.rarity">
+              <span class="item-icon">{{ item.icon }}</span>
+              <div class="item-info">
+                <span class="item-name">{{ item.name }}</span>
+                @if (item.quantity > 1) {
+                  <span class="item-quantity">x{{ item.quantity }}</span>
+                }
+                @if (item.type === 'potion' || item.id === 'dog-whistle') {
+                  <button (click)="useItem(item.id)" class="use-btn">Use</button>
+                }
+              </div>
+              @if (item.stats) {
+                <div class="item-stats">
+                  @if (item.stats.attack) {
+                    <span>⚔️ +{{ item.stats.attack }}</span>
+                  }
+                  @if (item.stats.defense) {
+                    <span>🛡️ +{{ item.stats.defense }}</span>
+                  }
+                  @if (item.stats.healthBoost) {
+                    <span>❤️ +{{ item.stats.healthBoost }}</span>
+                  }
+                </div>
+              }
+              @if (item.abilityName && item.abilityDescription) {
+                <div class="item-ability">
+                  <strong>{{ item.abilityName }}</strong>: {{ item.abilityDescription }}
+                </div>
+              }
+            </div>
+          } @empty {
+            <p class="empty-inventory">Your inventory is empty</p>
+          }
+        </div>
+      </div>
+
+      <!-- Player Stats Panel -->
+      <div class="player-stats-panel">
+        <h3>📊 Character Stats</h3>
+        <div class="stat-list">
+          <div class="stat-row">
+            <span>⚔️ Attack:</span>
+            <span class="stat-value">{{ gameService.player().attack }}</span>
+          </div>
+          <div class="stat-row">
+            <span>🛡️ Defense:</span>
+            <span class="stat-value">{{ gameService.player().defense }}</span>
+          </div>
+          <div class="stat-row">
+            <span>📍 Position:</span>
+            <span class="stat-value">({{ gameService.player().position.x }}, {{ gameService.player().position.y }})</span>
+          </div>
+          <div class="stat-row">
+            <span>🗺️ Realm:</span>
+            <span class="stat-value">{{ gameService.player().position.realm }}</span>
+          </div>
+          <div class="stat-row">
+            <span>🏰 Territories:</span>
+            <span class="stat-value">{{ gameService.player().territory.length }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Building Menu Modal -->
+  @if (gameService.showBuildingMenu()) {
+    <div class="modal-overlay" (click)="closeBuildMenu()" (keydown.escape)="closeBuildMenu()" tabindex="0" role="button" aria-label="Close building menu">
+      <div class="modal-content building-menu" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h2>🏗️ Build Structure</h2>
+          <button (click)="closeBuildMenu()" class="close-btn">✖️</button>
+        </div>
+        
+        <div class="building-grid">
+          @for (building of gameService.buildingCatalog; track building.type) {
+            <div class="building-card">
+              <div class="building-icon">{{ building.icon }}</div>
+              <h3>{{ building.name }}</h3>
+              <p class="building-desc">{{ building.description }}</p>
+              
+              <div class="building-costs">
+                <span class="label">Costs:</span>
+                @for (cost of building.costs; track cost.type) {
+                  <div class="cost-item">
+                    @switch (cost.type) {
+                      @case ('wood') { 🪵 }
+                      @case ('stone') { 🪨 }
+                      @case ('iron') { ⛓️ }
+                      @case ('food') { 🍎 }
+                      @case ('gold') { 💰 }
+                    }
+                    {{ cost.amount }}
+                  </div>
+                }
+              </div>
+              
+              <div class="building-benefits">
+                @for (benefit of building.benefits; track $index) {
+                  <span class="benefit">✓ {{ benefit }}</span>
+                }
+              </div>
+              
+              <button 
+                class="build-structure-btn"
+                (click)="buildAtCurrentLocation(building.type)">
+                Build at Current Location
+              </button>
+            </div>
+          }
+        </div>
+        
+        <div class="modal-hint">
+          💡 Right-click inside your territory to choose a build location, then select a building
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- City/House Modal -->
+  @if (gameService.showCityMenu()) {
+    <div class="modal-overlay" (click)="closeCityMenu()" (keydown.escape)="closeCityMenu()" tabindex="0" role="button" aria-label="Close city menu">
+      <div class="modal-content city-menu" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+        @if (gameService.selectedCity(); as city) {
+          <div class="modal-header">
+            <h2>🏠 {{ city.name }}</h2>
+            <button (click)="closeCityMenu()" class="close-btn">✖️</button>
+          </div>
+
+          <div class="city-stats">
+            <div class="stat-card">
+              <div class="stat-icon">👥</div>
+              <div>
+                <div class="stat-label">Population</div>
+                <div class="stat-value">{{ city.population }}/{{ city.maxPopulation }}</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">⭐</div>
+              <div>
+                <div class="stat-label">City Level</div>
+                <div class="stat-value">{{ city.level }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="city-resources">
+            <h3>Resources</h3>
+            <div class="resource-grid">
+              @for (resource of city.resources; track resource.type) {
+                <div class="resource-item">
+                  <span class="resource-icon">
+                    @switch (resource.type) {
+                      @case ('wood') { 🪵 }
+                      @case ('stone') { 🪨 }
+                      @case ('iron') { ⛓️ }
+                      @case ('food') { 🍎 }
+                      @case ('gold') { 💰 }
+                    }
+                  </span>
+                  <div class="resource-info">
+                    <span class="resource-name">{{ resource.type }}</span>
+                    <span class="resource-amount">{{ resource.amount }}</span>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="city-actions">
+            <button class="action-btn collect" (click)="collectCityResources(city.id)">📦 Collect</button>
+            <button class="action-btn build" (click)="openBuildMenu()">🏗️ Build</button>
+            <button class="action-btn enter" (click)="openHouseInterior()">🚪 Enter House</button>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- House Interior Modal -->
+  @if (gameService.showHouseInterior()) {
+    <div class="modal-overlay house-interior-overlay" (click)="closeHouseInterior()" (keydown.escape)="closeHouseInterior()" tabindex="0" role="button" aria-label="Close house interior">
+      <div class="house-interior" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+        <div class="interior-header">
+          <h2>🏠 House Interior</h2>
+          <button (click)="closeHouseInterior()" class="close-btn">✖️</button>
+        </div>
+
+        <!-- Hall View -->
+        @if (gameService.currentRoom() === 'hall') {
+          <div class="room-view hall-room">
+            <div class="room-title">Great Hall</div>
+            <div class="room-description">Welcome home. Where would you like to go?</div>
+            <div class="room-grid">
+              <div class="room-item">
+                <div class="room-door" (click)="goToRoom('bedroom')" (keydown.enter)="goToRoom('bedroom')" (keydown.space)="goToRoom('bedroom')" tabindex="0" role="button" aria-label="Go to bedroom">
+                  <span class="door-icon">🛏️</span>
+                  <span class="door-label">Bedroom</span>
+                </div>
+              </div>
+              <div class="room-item">
+                <div class="room-door" (click)="goToRoom('storage')" (keydown.enter)="goToRoom('storage')" (keydown.space)="goToRoom('storage')" tabindex="0" role="button" aria-label="Go to storage">
+                  <span class="door-icon">📦</span>
+                  <span class="door-label">Storage</span>
+                </div>
+              </div>
+              <div class="room-item">
+                <div class="room-door" (click)="goToRoom('workshop')" (keydown.enter)="goToRoom('workshop')" (keydown.space)="goToRoom('workshop')" tabindex="0" role="button" aria-label="Go to workshop">
+                  <span class="door-icon">⚒️</span>
+                  <span class="door-label">Workshop</span>
+                </div>
+              </div>
+              <div class="room-item">
+                <div class="room-door" (click)="goToRoom('vault')" (keydown.enter)="goToRoom('vault')" (keydown.space)="goToRoom('vault')" tabindex="0" role="button" aria-label="Go to treasury">
+                  <span class="door-icon">💎</span>
+                  <span class="door-label">Treasury</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+
+        <!-- Bedroom View -->
+        @if (gameService.currentRoom() === 'bedroom') {
+          <div class="room-view bedroom-room">
+            <div class="room-title">Bedroom</div>
+            <div class="room-description">Rest and recover your strength.</div>
+            <div class="room-actions">
+              <button class="action-btn rest-btn" (click)="rest()">😴 Rest</button>
+            </div>
+            <button class="back-btn" (click)="goToRoom('hall')">← Back to Hall</button>
+          </div>
+        }
+
+        <!-- Storage View -->
+        @if (gameService.currentRoom() === 'storage') {
+          <div class="room-view storage-room">
+            <div class="room-title">Storage</div>
+            <div class="room-description">Manage your resources.</div>
+            @if (gameService.selectedCity(); as city) {
+              <div class="storage-grid">
+                @for (resource of city.resources; track resource.type) {
+                  <div class="storage-item">
+                    <span class="storage-icon">
+                      @switch (resource.type) {
+                        @case ('wood') { 🪵 }
+                        @case ('stone') { 🪨 }
+                        @case ('iron') { ⛓️ }
+                        @case ('food') { 🍎 }
+                        @case ('gold') { 💰 }
+                      }
+                    </span>
+                    <div class="storage-info">
+                      <span class="storage-name">{{ resource.type }}</span>
+                      <span class="storage-amount">{{ resource.amount }}</span>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+            <button class="back-btn" (click)="goToRoom('hall')">← Back to Hall</button>
+          </div>
+        }
+
+        <!-- Workshop View -->
+        @if (gameService.currentRoom() === 'workshop') {
+          <div class="room-view workshop-room">
+            <div class="room-title">Workshop</div>
+            <div class="room-description">Forge items at the anvil.</div>
+            <div class="anvil-grid">
+              @for (recipe of gameService.anvilRecipes; track recipe.id) {
+                <div class="anvil-card">
+                  <div class="anvil-header">
+                    <span class="anvil-icon">{{ recipe.icon }}</span>
+                    <div class="anvil-name">{{ recipe.name }}</div>
+                    <div class="anvil-rarity">{{ recipe.rarity }}</div>
+                  </div>
+                  @if (recipe.stats?.attack || recipe.stats?.defense) {
+                    <div class="anvil-stats">
+                      @if (recipe.stats?.attack) {
+                        <span>⚔️ +{{ recipe.stats?.attack }} ATK</span>
+                      }
+                      @if (recipe.stats?.defense) {
+                        <span>🛡️ +{{ recipe.stats?.defense }} DEF</span>
+                      }
+                    </div>
+                  }
+                  <div class="anvil-costs">
+                    @for (cost of recipe.costs; track cost.type) {
+                      <div class="anvil-cost">
+                        <span class="cost-icon">
+                          @switch (cost.type) {
+                            @case ('wood') { 🪵 }
+                            @case ('stone') { 🪨 }
+                            @case ('iron') { ⛓️ }
+                            @case ('food') { 🍎 }
+                            @case ('gold') { 💰 }
+                          }
+                        </span>
+                        <span class="cost-amount">{{ cost.amount }}</span>
+                      </div>
+                    }
+                  </div>
+                  <button class="action-btn forge" (click)="craftAtAnvil(recipe.id)">Forge</button>
+                </div>
+              }
+            </div>
+            <div class="socketing-section">
+              <div class="socketing-title">Gem Socketing</div>
+              @if (getSocketableEquipment().length === 0) {
+                <div class="room-info">Equip a weapon or armor to socket gems.</div>
+              } @else {
+                @for (item of getSocketableEquipment(); track item.id) {
+                  <div class="socket-item">
+                    <div class="socket-item-header">
+                      <span class="socket-item-icon">{{ item.icon }}</span>
+                      <div class="socket-item-name">{{ item.name }}</div>
+                      <div class="socket-item-sockets">Sockets: {{ getSocketInfo(item) }}</div>
+                    </div>
+                    <div class="socketed-gems">
+                      @if (item.socketedGems?.length) {
+                        @for (gem of item.socketedGems; track gem.id) {
+                          <span class="socketed-gem" title="{{ gem.abilityName }}: {{ gem.abilityDescription }}">
+                            {{ gem.icon }}
+                          </span>
+                        }
+                      } @else {
+                        <span class="socketed-gem empty">No gems socketed</span>
+                      }
+                    </div>
+                    <div class="socket-gem-actions">
+                      @if (getGems().length === 0) {
+                        <span class="socket-empty">No gems available</span>
+                      } @else {
+                        @for (gem of getGems(); track gem.id) {
+                          <button class="action-btn socket" (click)="socketGem(item.id, gem.id)">
+                            Socket {{ gem.icon }} {{ gem.name }}
+                          </button>
+                        }
+                      }
+                    </div>
+                  </div>
+                }
+              }
+            </div>
+            <div class="room-info">Requires resources from your city storage.</div>
+            <button class="back-btn" (click)="goToRoom('hall')">← Back to Hall</button>
+          </div>
+        }
+
+        <!-- Vault View -->
+        @if (gameService.currentRoom() === 'vault') {
+          <div class="room-view vault-room">
+            <div class="room-title">Treasury</div>
+            <div class="room-description">Your precious treasures.</div>
+            @if (gameService.selectedCity(); as city) {
+              <div class="vault-gold">
+                <div class="gold-amount">💰 {{ gameService.player().gold }}g</div>
+              </div>
+            }
+            @if (authService.currentUser()?.isAdmin && authService.currentUser()?.username === 'DonaldBurt') {
+              <div class="vault-gold">
+                <div class="gold-amount">🏦 Bank: {{ gameService.ownerBankGold() }}g</div>
+              </div>
+            }
+            <button class="back-btn" (click)="goToRoom('hall')">← Back to Hall</button>
+          </div>
+        }
+      </div>
+    </div>
+  }

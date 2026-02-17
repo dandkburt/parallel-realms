@@ -1,0 +1,5 @@
+@if (!isAuthenticated()) {
+  <app-login />
+} @else {
+  <router-outlet />
+}

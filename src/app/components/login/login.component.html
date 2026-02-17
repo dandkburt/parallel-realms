@@ -1,0 +1,105 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h1>🧙 Parallel Realms</h1>
+      <p class="subtitle">Explore the World, Build Your Empire</p>
+    </div>
+
+    <div class="login-form">
+      @if (isLoginMode()) {
+        <h2>Login to Your Adventure</h2>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            id="username"
+            type="text"
+            [(ngModel)]="username"
+            placeholder="Enter your username"
+            class="form-input"
+            [disabled]="isLoading()"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            [(ngModel)]="password"
+            placeholder="Enter your password"
+            class="form-input"
+            (keyup.enter)="!isLoading() && login()"
+            [disabled]="isLoading()"
+          />
+        </div>
+
+        <button (click)="login()" class="login-btn" [disabled]="isLoading()">
+          {{ isLoading() ? 'Logging in...' : 'Login' }}
+        </button>
+
+        <div class="form-footer">
+          Don't have an account?
+          <button (click)="toggleMode()" class="toggle-btn" [disabled]="isLoading()">Create one</button>
+        </div>
+      } @else {
+        <h2>Create Your Account</h2>
+        <div class="form-group">
+          <label for="reg-username">Username</label>
+          <input
+            id="reg-username"
+            type="text"
+            [(ngModel)]="username"
+            placeholder="Choose a username"
+            class="form-input"
+            [disabled]="isLoading()"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            [(ngModel)]="email"
+            placeholder="Enter your email"
+            class="form-input"
+            [disabled]="isLoading()"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="reg-password">Password</label>
+          <input
+            id="reg-password"
+            type="password"
+            [(ngModel)]="password"
+            placeholder="Create a password"
+            class="form-input"
+            (keyup.enter)="!isLoading() && register()"
+            [disabled]="isLoading()"
+          />
+          <small>At least 6 characters</small>
+        </div>
+
+        <button (click)="register()" class="register-btn" [disabled]="isLoading()">
+          {{ isLoading() ? 'Creating account...' : 'Register' }}
+        </button>
+
+        <div class="form-footer">
+          Already have an account?
+          <button (click)="toggleMode()" class="toggle-btn" [disabled]="isLoading()">Login here</button>
+        </div>
+      }
+
+      @if (message()) {
+        <div [ngClass]="['message', messageType()]">
+          {{ message() }}
+        </div>
+      }
+    </div>
+
+    <div class="login-footer">
+      <p>⚔️ Battle monsters • 🏰 Build civilizations • 🗺️ Explore the world</p>
+    </div>
+  </div>
+</div>
