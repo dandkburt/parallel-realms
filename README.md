@@ -2,6 +2,7 @@
 
 A location-based MMORPG inspired by Parallel Kingdom, built with Angular v17. Explore vast realms, battle monsters, gather resources, build territories, and level up your character!
 
+
 ## 🌟 Features
 
 ### Core Gameplay
